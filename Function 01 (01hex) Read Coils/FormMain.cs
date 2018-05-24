@@ -21,25 +21,25 @@ namespace Function_01__01hex__Read_Coils
             InitializeComponent();
         }
 
-        private void btnSendMsg_Click(object sender, EventArgs e)
+        private void btnRequestMsg_Click(object sender, EventArgs e)
         {
             try
             {
-                byte slaveAddress = 32;// Slave Address
-                byte functionCode = 03;// Function
-                ushort startAddress = 40001;// Starting Address
-                ushort numberOfPoints = 2;// Quantity of Registers
+                byte slaveAddress = 04;// Slave Address - this can be found on the controller menu under Network
+                byte functionCode = 03;// Function code - 03 is for reading coils/registers
+                ushort startAddress = 40001;// Starting Address - register 40001 holds the turbidity reading as a float
+                ushort numberOfRegisters = 2;// Quantity of Registers to read
 
 
-                // Build Message(FC01)
+                // Build Message(FC03)
 
                 byte[] frame = new byte[8];// total 8 bytes
                 frame[0] = slaveAddress;// Slave Address
                 frame[1] = functionCode;// Function
                 frame[2] = (byte)(startAddress >> 8);// Starting Address High
                 frame[3] = (byte)startAddress;// Starting Address Low
-                frame[4] = (byte)(numberOfPoints >> 8);// quantity of Registers High
-                frame[5] = (byte)numberOfPoints;// quantity of Registers Low
+                frame[4] = (byte)(numberOfRegisters >> 8);// quantity of Registers High
+                frame[5] = (byte)numberOfRegisters;// quantity of Registers Low
                 byte[] checkSum = CRC16(frame);// call funtion CRC Calculate
                 frame[6] = checkSum[0];// error check Low
                 frame[7] = checkSum[1];// error check High
@@ -63,12 +63,13 @@ namespace Function_01__01hex__Read_Coils
                     receiveMsg += string.Format("{0:X2} ", item);
                 }
 
-                txtSendMsg.Text = sendMsg;
-                txtReceiveMsg.Text = receiveMsg;
+                txtRequestMsg.Text = sendMsg;
+                txtReceivedMsg.Text = receiveMsg;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //TODO close serial port
             }
         }
 
@@ -82,6 +83,7 @@ namespace Function_01__01hex__Read_Coils
             catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //TODO close serial port
             }
         }
 

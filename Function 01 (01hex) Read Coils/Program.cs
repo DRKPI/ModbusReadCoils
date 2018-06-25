@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Function_01__01hex__Read_Coils
+namespace Turbidity
 {
     static class Program
     {

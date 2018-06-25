@@ -1,4 +1,4 @@
-﻿namespace Function_01__01hex__Read_Coils
+﻿namespace Turbidity
 {
     partial class FormMain
     {
@@ -43,7 +43,7 @@
             this.btnRequestMsg.TabIndex = 0;
             this.btnRequestMsg.Text = "Request";
             this.btnRequestMsg.UseVisualStyleBackColor = true;
-            this.btnRequestMsg.Click += new System.EventHandler(this.btnSendMsg_Click);
+            this.btnRequestMsg.Click += new System.EventHandler(this.btnRequestMsg_Click);
             // 
             // label1
             // 
@@ -94,7 +94,7 @@
             this.MinimizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Function 01 (01hex) Read Coils";
+            this.Text = "Turbidity Data Collector";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

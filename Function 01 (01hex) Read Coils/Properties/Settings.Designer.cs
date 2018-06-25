@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Function_01__01hex__Read_Coils.Properties
+namespace Turbidity.Properties
 {
 
 

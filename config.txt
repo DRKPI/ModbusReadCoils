@@ -1,8 +1,13 @@
-Configuration information
-If the com port is ever moved or changed on the computer then it needs to be updated here as well.
-The baud rate in the config file and on the Turbidity device must match, please check both locations to verify.
-The time interval is for how often you want to grab a turbidity reading from device. This can be from 1 min to 60 min.
+Configuration Information
+If the com port is ever changed on the computer then it needs to be updated here (line 13) as well.
+	In order for the program to work the com port listed in this file must match the com port used on computer.
+	If not sure of which com port is being used, look in Device Manager --> Ports
+The baud rate here (line 13), and on the Turbidity device (sc200) must match, please check both locations to verify.
+	From the sc200 controller home screen, choose Network Setup --> Baud Rate
+	For RS232 connection, 9600 baud rate is best, but it can also go up to 19200 baud rate.
+The time interval (line 13) is for how often you want to grab a turbidity reading from your device.
+	This can be anytime from 1 min up to 60 min.
 
-******************CONFIGURATION INFORMATION******************
+******CONFIGURATION INFORMATION******
 COM PORT	BAUD RATE	TIME INTERVAL
 COM3		9600		30

@@ -30,16 +30,16 @@ namespace Turbidity
         {
             turbidity.BuildMessage();
 
-            turbidity.WriteToSP(turbidity.message, out string ErrorMessage);
+            turbidity.WriteToSP(turbidity.message);
             //Error message
-            if (!String.IsNullOrEmpty(ErrorMessage))
+            if (!String.IsNullOrEmpty(turbidity.errorMessage))
             {
                 MessageBox.Show("Error sending message to Turbidity meter. \n See log file for details.", "Error Message", MessageBoxButtons.OK);
             }
             Thread.Sleep(TimeSpan.FromSeconds(2));
-            turbidity.ReadFromSP(out  ErrorMessage);
+            turbidity.ReadFromSP();
             //Error message
-            if (!String.IsNullOrEmpty(ErrorMessage))
+            if (!String.IsNullOrEmpty(turbidity.errorMessage))
             {
                 MessageBox.Show("Error receiving message from Turbidity meter. \n See log file for details.", "Error Message", MessageBoxButtons.OK);
             }
@@ -62,9 +62,9 @@ namespace Turbidity
         private void FormMain_Load(object sender, EventArgs e)
         {
             // Open a serial port and handle any error
-            turbidity.OpenSerialPort(out string ErrorMessage);
+            turbidity.OpenSerialPort();
             //Error message
-            if (!String.IsNullOrEmpty(ErrorMessage))
+            if (!String.IsNullOrEmpty(turbidity.errorMessage))
             {
                 MessageBox.Show("Serial Port Open Issue. See log file for details. ", "Error Message", MessageBoxButtons.OK);
             }

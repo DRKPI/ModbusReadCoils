@@ -37,7 +37,7 @@
             // 
             // btnRequestMsg
             // 
-            this.btnRequestMsg.Location = new System.Drawing.Point(207, 145);
+            this.btnRequestMsg.Location = new System.Drawing.Point(237, 145);
             this.btnRequestMsg.Name = "btnRequestMsg";
             this.btnRequestMsg.Size = new System.Drawing.Size(142, 40);
             this.btnRequestMsg.TabIndex = 0;
@@ -48,7 +48,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(61, 33);
+            this.label1.Location = new System.Drawing.Point(12, 409);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 25);
             this.label1.TabIndex = 1;
@@ -56,16 +56,16 @@
             // 
             // txtRequestMsg
             // 
-            this.txtRequestMsg.Location = new System.Drawing.Point(207, 30);
+            this.txtRequestMsg.Location = new System.Drawing.Point(146, 416);
             this.txtRequestMsg.Name = "txtRequestMsg";
             this.txtRequestMsg.Size = new System.Drawing.Size(396, 30);
             this.txtRequestMsg.TabIndex = 2;
             // 
             // txtReceivedMsg
             // 
-            this.txtReceivedMsg.Location = new System.Drawing.Point(207, 82);
+            this.txtReceivedMsg.Location = new System.Drawing.Point(237, 82);
             this.txtReceivedMsg.Name = "txtReceivedMsg";
-            this.txtReceivedMsg.Size = new System.Drawing.Size(396, 30);
+            this.txtReceivedMsg.Size = new System.Drawing.Size(280, 30);
             this.txtReceivedMsg.TabIndex = 4;
             // 
             // label2
@@ -73,9 +73,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(61, 85);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(137, 25);
+            this.label2.Size = new System.Drawing.Size(170, 25);
             this.label2.TabIndex = 3;
-            this.label2.Text = "ReceivedMsg:";
+            this.label2.Text = "Turbidity Reading:";
             // 
             // FormMain
             // 

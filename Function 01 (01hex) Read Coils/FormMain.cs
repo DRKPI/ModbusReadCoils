@@ -45,11 +45,11 @@ namespace Turbidity
             }
 
             //Print to screen and save to a .csv file
-            turbidity.PrintModbusMessage(turbidity.message, turbidity.buffRec);
+            //    turbidity.PrintModbusMessage(turbidity.message, turbidity.buffRec);
             //These are displayed to help with testing and trouble shooting
             //Test
-            txtRequestMsg.Text = turbidity.sendMsg;
-            txtReceivedMsg.Text = turbidity.receiveMsg;
+            //    txtRequestMsg.Text = turbidity.sendMsg;
+            txtReceivedMsg.Text = turbidity.turbidNum;
             //Test
 
         }// end Function btnRequestMsg_Click

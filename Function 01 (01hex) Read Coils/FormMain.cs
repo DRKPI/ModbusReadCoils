@@ -14,7 +14,7 @@ namespace Turbidity
 {
     public partial class FormMain : Form
     {
-        TurbidityPacket turbidity = new TurbidityPacket();
+        TurbidityCommunication turbidity = new TurbidityCommunication();
 
         public FormMain()
         {
@@ -44,14 +44,8 @@ namespace Turbidity
                 MessageBox.Show("Error receiving message from Turbidity meter. \n See log file for details.", "Error Message", MessageBoxButtons.OK);
             }
 
-            //Print to screen and save to a .csv file
-            //    turbidity.PrintModbusMessage(turbidity.message, turbidity.buffRec);
-            //These are displayed to help with testing and trouble shooting
-            //Test
-            //    txtRequestMsg.Text = turbidity.sendMsg;
+            //Print turbidity number to screen
             txtReceivedMsg.Text = turbidity.turbidNum;
-            //Test
-
         }// end Function btnRequestMsg_Click
 
         /// <summary>
@@ -69,8 +63,6 @@ namespace Turbidity
                 MessageBox.Show("Serial Port Open Issue. See log file for details. ", "Error Message", MessageBoxButtons.OK);
             }
         }// end Function FormMain_Load
-
-      
     }
 }
 

@@ -28,32 +28,20 @@ namespace Turbidity
         /// <param name="e"></param>
         private void btnRequestMsg_Click(object sender, EventArgs e)
         {
-            while (true)
-            {
-                turbidity.WriteToSP(turbidity.message);
-                //Error message
-                if (!String.IsNullOrEmpty(turbidity.errorMessage))
-                {
-                    MessageBox.Show("Error sending message to Turbidity meter." + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
+            //Disable request button
+            btnRequestMsg.Enabled = false;
 
-                }
-                Thread.Sleep(TimeSpan.FromSeconds(2));
-                turbidity.ReadFromSP();
-                //Error message
-                if (!String.IsNullOrEmpty(turbidity.errorMessage))
-                {
-                    MessageBox.Show("Error receiving message from Turbidity meter." + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
+            //Disable timer
+            timer1.Enabled = false;
 
-                }
+            //Call startProcess function
+            StartProcess();
 
-                turbidity.WriteTurbidDataToFile();
+            //Enable timer
+            timer1.Enabled = true;
 
-                //Print turbidity number to screen
-                txtReceivedMsg.Text = turbidity.turbidNum;
-
-                //Wait specified time span before getting turbidity reading again
-                Thread.Sleep(TimeSpan.FromMinutes(turbidity.timeInterval));
-            }
+            //Enable request button
+            btnRequestMsg.Enabled = true;
         }// end Function btnRequestMsg_Click
 
         /// <summary>
@@ -77,6 +65,46 @@ namespace Turbidity
                     " See log file for details. ", "Error Message", MessageBoxButtons.OK);
             }
         }// end Function FormMain_Load
+
+        /// <summary>
+        /// Timer to continually request new Turbidity reading
+        /// Set to time interval of users choosing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Interval = turbidity.timeInterval * 60000;//Timer is in milliseconds so need to convert minutes from timeInterval to milliseconds
+            StartProcess();
+        }
+
+        /// <summary>
+        /// Start the process of gathering Turbidity reading
+        /// Ends with displaying Turbidity reading to txtReceivedMsg.Text
+        /// </summary>
+        private void StartProcess()
+        {
+            //Send message to sc200 controller
+            turbidity.WriteToSP(turbidity.message);
+            //Error message
+            if (!String.IsNullOrEmpty(turbidity.errorMessage))
+            {
+                MessageBox.Show("Error sending message to Turbidity meter." + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
+            }
+            Thread.Sleep(TimeSpan.FromSeconds(1));
+            //Read message from sc200 controller
+            turbidity.ReadFromSP();
+            //Error message
+            if (!String.IsNullOrEmpty(turbidity.errorMessage))
+            {
+                MessageBox.Show("Error receiving message from Turbidity meter." + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
+            }
+            //Write converted Turbidity number out to file
+            turbidity.WriteTurbidDataToFile();
+
+            //Print turbidity number to screen
+            txtReceivedMsg.Text = turbidity.turbidNum;
+        }
     }
 }
 

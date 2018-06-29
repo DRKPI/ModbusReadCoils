@@ -351,7 +351,7 @@ namespace Turbidity
         /// Writes the Turbidity number received from the sc200 Controller out to a text file
         /// This is an appended file with the date and time stamp attached to each value
         /// </summary>
-        private void WriteTurbidDataToFile()
+        public void WriteTurbidDataToFile()
         {
             //TODO - write out number along with date and time to file
 

@@ -46,11 +46,13 @@ namespace Turbidity
 
                 }
 
+                turbidity.WriteTurbidDataToFile();
+
                 //Print turbidity number to screen
                 txtReceivedMsg.Text = turbidity.turbidNum;
 
                 //Wait specified time span before getting turbidity reading again
-                //Thread.Sleep(TimeSpan.FromMinutes(turbidity.timeInterval));
+                Thread.Sleep(TimeSpan.FromMinutes(turbidity.timeInterval));
             }
         }// end Function btnRequestMsg_Click
 
@@ -78,7 +80,5 @@ namespace Turbidity
     }
 }
 
-//TODO - change error message from pop up to a hidden text box/status message,
-//TODO - close and restart app after any errors
 //TODO - add edit options to form (include com port, baud rate, sync time (1min - 60min)), hide edit boxes unless edit is chosen
 //TODO - decide where to put the edit option (button or menu option)

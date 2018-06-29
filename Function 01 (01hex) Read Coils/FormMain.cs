@@ -28,39 +28,51 @@ namespace Turbidity
         /// <param name="e"></param>
         private void btnRequestMsg_Click(object sender, EventArgs e)
         {
-            turbidity.BuildMessage();
-
-            turbidity.WriteToSP(turbidity.message);
-            //Error message
-            if (!String.IsNullOrEmpty(turbidity.errorMessage))
+            while (true)
             {
-                MessageBox.Show("Error sending message to Turbidity meter. \n See log file for details.", "Error Message", MessageBoxButtons.OK);
-            }
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-            turbidity.ReadFromSP();
-            //Error message
-            if (!String.IsNullOrEmpty(turbidity.errorMessage))
-            {
-                MessageBox.Show("Error receiving message from Turbidity meter. \n See log file for details.", "Error Message", MessageBoxButtons.OK);
-            }
+                turbidity.WriteToSP(turbidity.message);
+                //Error message
+                if (!String.IsNullOrEmpty(turbidity.errorMessage))
+                {
+                    MessageBox.Show("Error sending message to Turbidity meter." + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
 
-            //Print turbidity number to screen
-            txtReceivedMsg.Text = turbidity.turbidNum;
+                }
+                Thread.Sleep(TimeSpan.FromSeconds(2));
+                turbidity.ReadFromSP();
+                //Error message
+                if (!String.IsNullOrEmpty(turbidity.errorMessage))
+                {
+                    MessageBox.Show("Error receiving message from Turbidity meter." + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
+
+                }
+
+                //Print turbidity number to screen
+                txtReceivedMsg.Text = turbidity.turbidNum;
+
+                //Wait specified time span before getting turbidity reading again
+                //Thread.Sleep(TimeSpan.FromMinutes(turbidity.timeInterval));
+            }
         }// end Function btnRequestMsg_Click
 
         /// <summary>
-        /// On load of form start a serial port
+        /// On load of form starts a serial port and 
+        /// builds message to send to turbidity device
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
+            //Call Function to build Modbus request message
+            turbidity.BuildMessage();
+
             // Open a serial port and handle any error
             turbidity.OpenSerialPort();
             //Error message
             if (!String.IsNullOrEmpty(turbidity.errorMessage))
             {
-                MessageBox.Show("Serial Port Open Issue. See log file for details. ", "Error Message", MessageBoxButtons.OK);
+                MessageBox.Show("Serial Port could not be opended." + Environment.NewLine +
+                    "Verify the config file is written in the correct format." + Environment.NewLine +
+                    " See log file for details. ", "Error Message", MessageBoxButtons.OK);
             }
         }// end Function FormMain_Load
     }

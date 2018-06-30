@@ -81,6 +81,8 @@ namespace Turbidity
         /// <summary>
         /// Start the process of gathering Turbidity reading
         /// Ends with displaying Turbidity reading to txtReceivedMsg.Text
+        /// I decided to create this function in FormMain instead of TurbidityPacket cause I found this
+        ///     to be the easiest way to pass error messages to the user for the correct function calls
         /// </summary>
         private void StartProcess()
         {
@@ -89,7 +91,8 @@ namespace Turbidity
             //Error message
             if (!String.IsNullOrEmpty(turbidity.errorMessage))
             {
-                MessageBox.Show("Error sending message to Turbidity meter." + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
+                MessageBox.Show("Error sending message to Turbidity meter."
+                    + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
             }
             Thread.Sleep(TimeSpan.FromSeconds(1));
             //Read message from sc200 controller
@@ -97,10 +100,16 @@ namespace Turbidity
             //Error message
             if (!String.IsNullOrEmpty(turbidity.errorMessage))
             {
-                MessageBox.Show("Error receiving message from Turbidity meter." + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
+                MessageBox.Show("Error receiving message from Turbidity meter."
+                    + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
             }
             //Write converted Turbidity number out to file
             turbidity.WriteTurbidDataToFile();
+            if (!String.IsNullOrEmpty(turbidity.errorMessage))
+            {
+                MessageBox.Show("Error writing turbidity number out to file."
+                    + Environment.NewLine + "See log file for details.", "Error Message", MessageBoxButtons.OK);
+            }
 
             //Print turbidity number to screen
             txtReceivedMsg.Text = turbidity.turbidNum;

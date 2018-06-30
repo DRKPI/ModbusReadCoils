@@ -100,8 +100,7 @@ namespace Turbidity
                     + Environment.NewLine + "COM PORT	BAUD RATE	TIME INTERVAL"
                     + Environment.NewLine + "COM3		9600		60";
                     //Write to file
-                    using (StreamWriter file =
-                        new StreamWriter(path))
+                    using (StreamWriter file = new StreamWriter(path))
                     {
                         file.Write(defaultConfigFile);
                     }
@@ -353,9 +352,55 @@ namespace Turbidity
         /// </summary>
         public void WriteTurbidDataToFile()
         {
-            //TODO - write out number along with date and time to file
+            string dateTimeStamp = DateTime.Now.ToString();
+            DateTime dateYear = new DateTime();
+            string year = dateYear.Year.ToString();
+            string path = "_Turbidity_Readings.txt";
+            errorMessage = String.Empty;
 
-        }
+            //TODO - write out number along with date and time to file
+            //Check if file exist, if not then create file with header information
+            //File name will have the current year as part of file name
+            //Compare current year (of file name) to current year, if not a match create new file for new year
+            try
+            {
+                //If config.txt does not exist create with the following information
+                if (!File.Exists(year + path))
+                {
+                    //Create default text to write to file
+                    string defaultTurbidReadingFile = "Turbidity Numbers Received from Controller"
+                    + Environment.NewLine + "-------------------------------------"
+                    + Environment.NewLine + "Date\t\t" + "Turbidity Reading"
+                    + Environment.NewLine + dateTimeStamp + "\t\t" + turbidNum;
+                    //Write to file
+                    using (StreamWriter file = new StreamWriter(path))
+                    {
+                        file.Write(defaultTurbidReadingFile);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //Log any error message
+                LogError(errorMessage = ex.Message.ToString());
+            }
+            
+            //Append turbidNum and date and time to existing file
+            try
+            {
+                // The using statement automatically flushes AND CLOSES the stream and calls 
+                // IDisposable.Dispose on the stream object.
+                using (StreamWriter file = new StreamWriter(year + path, true))
+                {
+                    file.WriteLine(dateTimeStamp + path + Environment.NewLine);
+                }
+            }
+            catch (Exception ex)
+            {
+                //Send error messgage to the form load method in FormMain.cs
+                LogError(errorMessage += Environment.NewLine + ex.ToString());
+            }
+        }// end Function WriteTurbidDataToFile
 
         /// <summary>
         /// Log error message out to file
@@ -372,8 +417,7 @@ namespace Turbidity
                 // Append new text to an existing file.
                 // The using statement automatically flushes AND CLOSES the stream and calls 
                 // IDisposable.Dispose on the stream object.
-                using (StreamWriter file =
-                    new StreamWriter(path, true))
+                using (StreamWriter file = new StreamWriter(path, true))
                 {
                     file.WriteLine(dateTimeStamp + Environment.NewLine + errorMessage + Environment.NewLine + Environment.NewLine);
                 }
@@ -389,7 +433,3 @@ namespace Turbidity
         }// end Function LogError
     }// end Class
 }// end Namespace
-
-
-
-//TODO create new data file for each year - in file name include date/year and check that value with current year, if different create new file

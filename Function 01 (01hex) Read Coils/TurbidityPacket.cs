@@ -352,26 +352,24 @@ namespace Turbidity
         /// </summary>
         public void WriteTurbidDataToFile()
         {
-            string dateTimeStamp = DateTime.Now.ToString();
-            DateTime dateYear = new DateTime();
-            string year = dateYear.Year.ToString();
-            string path = "_Turbidity_Readings.txt";
+            string dateTimeStamp = DateTime.Now.ToString("MM/dd/yyyy HH:mm");//TODO - format date and time  to not include seconds
+            string year = DateTime.Parse(DateTime.Now.ToString()).Year.ToString();//get just the current year value
+            string path = year + "_Turbidity_Readings.txt";
             errorMessage = String.Empty;
 
-            //TODO - write out number along with date and time to file
             //Check if file exist, if not then create file with header information
             //File name will have the current year as part of file name
             //Compare current year (of file name) to current year, if not a match create new file for new year
             try
             {
                 //If config.txt does not exist create with the following information
-                if (!File.Exists(year + path))
+                if (!File.Exists(path))
                 {
                     //Create default text to write to file
                     string defaultTurbidReadingFile = "Turbidity Numbers Received from Controller"
-                    + Environment.NewLine + "-------------------------------------"
-                    + Environment.NewLine + "Date\t\t" + "Turbidity Reading"
-                    + Environment.NewLine + dateTimeStamp + "\t\t" + turbidNum;
+                    + Environment.NewLine + "------------------------------------------"
+                    + Environment.NewLine + "Date\t\t\t" + "Turbidity Reading"
+                    + Environment.NewLine;
                     //Write to file
                     using (StreamWriter file = new StreamWriter(path))
                     {
@@ -390,9 +388,9 @@ namespace Turbidity
             {
                 // The using statement automatically flushes AND CLOSES the stream and calls 
                 // IDisposable.Dispose on the stream object.
-                using (StreamWriter file = new StreamWriter(year + path, true))
+                using (StreamWriter file = new StreamWriter(path, true))
                 {
-                    file.WriteLine(dateTimeStamp + path + Environment.NewLine);
+                    file.WriteLine(dateTimeStamp + "\t" + turbidNum);
                 }
             }
             catch (Exception ex)

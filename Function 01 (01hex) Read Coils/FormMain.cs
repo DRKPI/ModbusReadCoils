@@ -82,7 +82,7 @@ namespace Turbidity
         /// Start the process of gathering Turbidity reading
         /// Ends with displaying Turbidity reading to txtReceivedMsg.Text
         /// I decided to create this function in FormMain instead of TurbidityPacket cause I found this
-        ///     to be the easiest way to pass error messages to the user for the correct function calls
+        ///     to be the easiest way to pass error messages to the user associated with the correct function calls
         /// </summary>
         private void StartProcess()
         {
@@ -113,6 +113,11 @@ namespace Turbidity
 
             //Print turbidity number to screen
             txtReceivedMsg.Text = turbidity.turbidNum;
+        }
+
+        private void closeMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

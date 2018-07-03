@@ -353,19 +353,12 @@ namespace Turbidity
         /// </summary>
         public void WriteTurbidDataToFile()
         {
-<<<<<<< HEAD
             string dateTimeStamp = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
-            string year = DateTime.Parse(DateTime.Now.ToString()).Year.ToString();//get just the current year value
+            string year = DateTime.Parse(DateTime.Now.ToString()).Year.ToString();
             string path = year + "_Turbidity_Readings.txt";
-=======
-            string dateTimeStamp = DateTime.Now.ToString();
-            DateTime dateYear = new DateTime();
-            string year = dateYear.Year.ToString();
-            string path = "_Turbidity_Readings.txt";
->>>>>>> parent of b67adc5... Formatted DateTime to not display seconds and fixed year to correctly save current year
+           
             errorMessage = String.Empty;
 
-            //TODO - write out number along with date and time to file
             //Check if file exist, if not then create file with header information
             //File name will have the current year as part of file name
             //Compare current year (of file name) to current year, if not a match create new file for new year

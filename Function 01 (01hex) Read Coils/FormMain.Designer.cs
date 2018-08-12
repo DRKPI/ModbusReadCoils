@@ -115,19 +115,19 @@
             // editMenuItem
             // 
             this.editMenuItem.Name = "editMenuItem";
-            this.editMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.editMenuItem.Size = new System.Drawing.Size(146, 30);
             this.editMenuItem.Text = "Edit";
             // 
             // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
-            this.aboutMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.aboutMenuItem.Size = new System.Drawing.Size(146, 30);
             this.aboutMenuItem.Text = "About";
             // 
             // closeMenuItem
             // 
             this.closeMenuItem.Name = "closeMenuItem";
-            this.closeMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.closeMenuItem.Size = new System.Drawing.Size(146, 30);
             this.closeMenuItem.Text = "Close";
             this.closeMenuItem.Click += new System.EventHandler(this.closeMenuItem_Click);
             // 

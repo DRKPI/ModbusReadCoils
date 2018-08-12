@@ -33,6 +33,7 @@ namespace Turbidity
 
             //Disable timer
             timer1.Enabled = false;
+            timer1.Interval = turbidity.timeInterval * 60000;//Timer is in milliseconds so need to convert minutes from timeInterval to milliseconds
 
             //Call startProcess function
             StartProcess();
@@ -74,7 +75,6 @@ namespace Turbidity
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Interval = turbidity.timeInterval * 60000;//Timer is in milliseconds so need to convert minutes from timeInterval to milliseconds
             StartProcess();
         }
 
@@ -122,5 +122,4 @@ namespace Turbidity
     }
 }
 
-//TODO - add edit options to form (include com port, baud rate, sync time (1min - 60min)), hide edit boxes unless edit is chosen
-//TODO - decide where to put the edit option (button or menu option)
+//TODO - add edit options to form (include com port, baud rate, sync time (1min - 60min))

@@ -355,14 +355,18 @@ namespace Turbidity
         {
 <<<<<<< HEAD
             string dateTimeStamp = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
-            string year = DateTime.Parse(DateTime.Now.ToString()).Year.ToString();//get just the current year value
+            string year = DateTime.Parse(DateTime.Now.ToString()).Year.ToString();
             string path = year + "_Turbidity_Readings.txt";
+<<<<<<< HEAD
 =======
             string dateTimeStamp = DateTime.Now.ToString();
             DateTime dateYear = new DateTime();
             string year = dateYear.Year.ToString();
             string path = "_Turbidity_Readings.txt";
 >>>>>>> parent of b67adc5... Formatted DateTime to not display seconds and fixed year to correctly save current year
+=======
+           
+>>>>>>> 3940bdd1912b1380288d0e9e3c5c7dc745c49801
             errorMessage = String.Empty;
 
             //TODO - write out number along with date and time to file
